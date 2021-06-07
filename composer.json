@@ -1,0 +1,28 @@
+{
+    "name": "awesome-packages/awesome-cli",
+    "description": "A awesome cli for php",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "AwesomePackages\\AwesomeCli\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rhuangabrielsantos",
+            "email": "rhuan.santos@db1.com.br"
+        }
+    ],
+    "require": {},
+    "bin": [
+        "awesome-cli"
+    ],
+    "config": {
+        "platform": {
+            "php": "8.0.0"
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
