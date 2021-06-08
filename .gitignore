@@ -1,4 +1,6 @@
+.idea
 /vendor/
+.phpunit.result.cache
 
 # Development
 docker-compose.yml
