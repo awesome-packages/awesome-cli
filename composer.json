@@ -3,9 +3,17 @@
     "description": "A awesome cli for php",
     "type": "library",
     "license": "MIT",
+    "scripts": {
+        "test": "./vendor/bin/phpunit --colors test"
+    },
     "autoload": {
         "psr-4": {
             "AwesomePackages\\AwesomeCli\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AwesomePackages\\AwesomeCliTests\\": "test/src/"
         }
     },
     "authors": [
@@ -14,7 +22,9 @@
             "email": "rhuan.santos@db1.com.br"
         }
     ],
-    "require": {},
+    "require": {
+        "phpunit/phpunit": "9.5.x-dev"
+    },
     "bin": [
         "awesome-cli"
     ],

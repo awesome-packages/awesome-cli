@@ -42,4 +42,4 @@ if (!defined('PHP_COMPOSER_INSTALL')) {
 
 require PHP_COMPOSER_INSTALL;
 
-AwesomePackages\AwesomeCli\HelloWorld::say();
+AwesomePackages\AwesomeCli\AwesomeCommand::say();
