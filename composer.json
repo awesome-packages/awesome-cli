@@ -1,6 +1,6 @@
 {
     "name": "awesome-packages/awesome-cli",
-    "description": "A awesome cli for php",
+    "description": "An awesome cli package for php",
     "type": "library",
     "license": "MIT",
     "scripts": {
@@ -22,7 +22,7 @@
             "email": "rhuan.santos@db1.com.br"
         }
     ],
-    "require": {
+    "require-dev": {
         "phpunit/phpunit": "9.5.x-dev"
     },
     "bin": [
