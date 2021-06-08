@@ -42,4 +42,23 @@ if (!defined('PHP_COMPOSER_INSTALL')) {
 
 require PHP_COMPOSER_INSTALL;
 
-AwesomePackages\AwesomeCli\AwesomeCommand::say();
+use AwesomePackages\AwesomeCli\Exception\CommandNotFound;
+use AwesomePackages\AwesomeCli\Exception\DuplicateCommand;
+
+foreach ([__DIR__ . '/../../src/config/commands.php', __DIR__ . '/../src/config/commands.php', __DIR__ . '/src/config/commands.php'] as $file) {
+    if (file_exists($file)) {
+        define('PHP_COMMANDS', $file);
+
+        break;
+    }
+}
+
+unset($file);
+
+require PHP_COMMANDS;
+
+try {
+    echo AwesomePackages\AwesomeCli\CommandRunner::runCommand($argv[1]) . PHP_EOL;
+} catch (CommandNotFound | DuplicateCommand | ReflectionException $exception) {
+    echo $exception->getMessage() . PHP_EOL;
+}

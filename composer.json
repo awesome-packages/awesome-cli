@@ -4,7 +4,8 @@
     "type": "library",
     "license": "MIT",
     "scripts": {
-        "test": "./vendor/bin/phpunit --colors test"
+        "test": "./vendor/bin/phpunit --colors test",
+        "awesome-cli": "./awesome-cli"
     },
     "autoload": {
         "psr-4": {
