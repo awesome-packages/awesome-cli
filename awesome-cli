@@ -45,9 +45,9 @@ require PHP_COMPOSER_INSTALL;
 use AwesomePackages\AwesomeCli\Exception\CommandNotFound;
 use AwesomePackages\AwesomeCli\Exception\DuplicateCommand;
 
-foreach ([__DIR__ . '/../../src/config/commands.php', __DIR__ . '/../src/config/commands.php', __DIR__ . '/src/config/commands.php'] as $file) {
+foreach ([__DIR__ . '/../../../src/config/commands.php', __DIR__ . '/src/config/commands.php'] as $file) {
     if (file_exists($file)) {
-        define('PHP_COMMANDS', $file);
+        define('REGISTERED_COMMANDS', $file);
 
         break;
     }
@@ -55,7 +55,7 @@ foreach ([__DIR__ . '/../../src/config/commands.php', __DIR__ . '/../src/config/
 
 unset($file);
 
-require PHP_COMMANDS;
+require REGISTERED_COMMANDS;
 
 try {
     echo AwesomePackages\AwesomeCli\CommandRunner::runCommand($argv[1]) . PHP_EOL;
