@@ -39,7 +39,7 @@ final class SayHelloWorldCommand extends AwesomeCommand
     protected string $action = 'hello-world';
     protected string $description = 'This is a simple description';
 
-    public function run(): string
+    public function handle(): string
     {
         return 'Hello World';
     }

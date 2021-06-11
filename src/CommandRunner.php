@@ -2,6 +2,7 @@
 
 namespace AwesomePackages\AwesomeCli;
 
+use AwesomePackages\AwesomeCli\Commands\HelpCommand;
 use AwesomePackages\AwesomeCli\Exception\CommandNotExtendsAwesomeCommand;
 use AwesomePackages\AwesomeCli\Exception\CommandNotFound;
 use AwesomePackages\AwesomeCli\Exception\DuplicateCommand;
@@ -63,30 +64,35 @@ final class CommandRunner
 
         $groupAttribute = $class->getGroup();
         if (empty($groupAttribute)) {
-            throw new UndefinedGroup();
+            throw new UndefinedGroup($command);
         }
 
         $actionAttribute = $class->getAction();
         if (empty($actionAttribute)) {
-            throw new UndefinedAction();
+            throw new UndefinedAction($command);
         }
 
         $descriptionAttribute = $class->getDescription();
         if (empty($descriptionAttribute)) {
-            throw new UndefinedDescription();
+            throw new UndefinedDescription($command);
         }
     }
 
     /**
-     * @param string $argument
+     * @param string|null $argument
      * @return string
      *
      * @throws \AwesomePackages\AwesomeCli\Exception\CommandNotFound
      * @throws \ReflectionException
      * @throws \AwesomePackages\AwesomeCli\Exception\DuplicateCommand
+     * @throws \AwesomePackages\AwesomeCli\Exception\CommandNotConfigured
      */
-    public static function runCommand(string $argument): string
+    public static function runCommand(?string $argument): string
     {
+        if (is_null($argument) || $argument === 'help') {
+            return HelpCommand::handle();
+        }
+
         $classCommand = array_filter(self::$commands, function($command) use ($argument) {
             $class = new $command;
 
@@ -104,6 +110,6 @@ final class CommandRunner
             throw new DuplicateCommand();
         }
 
-        return (new \ReflectionMethod($classCommand[0], 'run'))->invoke(new $classCommand[0]);
+        return (new \ReflectionMethod($classCommand[0], 'handle'))->invoke(new $classCommand[0]);
     }
 }

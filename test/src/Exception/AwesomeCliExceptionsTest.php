@@ -28,7 +28,7 @@ final class AwesomeCliExceptionsTest extends TestCase
     public function givenCommandClass_WithoutTheGroupAttribute_ShouldThrowException(): void
     {
         $this->expectException(UndefinedGroup::class);
-        $this->expectExceptionMessage('Undefined group');
+        $this->expectExceptionMessage('Undefined group in the command AwesomePackages\AwesomeCliTests\Mock\CommandWithoutGroup');
 
         CommandRunner::registerCommand([
             CommandWithoutGroup::class
@@ -39,7 +39,7 @@ final class AwesomeCliExceptionsTest extends TestCase
     public function givenCommandClass_WithoutTheActionAttribute_ShouldThrowException(): void
     {
         $this->expectException(UndefinedAction::class);
-        $this->expectExceptionMessage('Undefined action');
+        $this->expectExceptionMessage('Undefined action in the command AwesomePackages\AwesomeCliTests\Mock\CommandWithoutAction');
 
         CommandRunner::registerCommand([
             CommandWithoutAction::class
@@ -50,7 +50,7 @@ final class AwesomeCliExceptionsTest extends TestCase
     public function givenCommandClass_WithoutTheDescriptionAttribute_ShouldThrowException(): void
     {
         $this->expectException(UndefinedDescription::class);
-        $this->expectExceptionMessage('Undefined description');
+        $this->expectExceptionMessage('Undefined description in the command AwesomePackages\AwesomeCliTests\Mock\CommandWithoutDescription');
 
         CommandRunner::registerCommand([
             CommandWithoutDescription::class
@@ -99,7 +99,7 @@ final class AwesomeCliExceptionsTest extends TestCase
     public function givenCommandRunner_WithClassThatNotConfiguredRunMethod_ShouldThrowException(): void
     {
         $this->expectException(CommandNotConfigured::class);
-        $this->expectExceptionMessage('Command not configured, create the run method in your command class');
+        $this->expectExceptionMessage('Command not configured, create the handle method in your command class');
 
         CommandRunner::registerCommand([
             CommandWithoutRunMethod::class

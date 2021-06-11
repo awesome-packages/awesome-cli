@@ -14,7 +14,7 @@ abstract class AwesomeCommand
      * @return string
      * @throws \AwesomePackages\AwesomeCli\Exception\CommandNotConfigured
      */
-    public function run(): string
+    public static function handle(): string
     {
         throw new CommandNotConfigured();
     }

@@ -4,5 +4,8 @@ namespace AwesomePackages\AwesomeCli\Exception;
 
 class UndefinedAction extends \Exception
 {
-    protected $message = 'Undefined action';
+    public function __construct(string $command)
+    {
+        parent::__construct("Undefined action in the command $command");
+    }
 }
