@@ -57,8 +57,13 @@ unset($file);
 
 try {
     require REGISTERED_COMMANDS;
+    $printer = new Printer();
 
-    Printer::echo(AwesomePackages\AwesomeCli\CommandRunner::runCommand($argv[1] ?? null));
+    $printer->addMessage(AwesomePackages\AwesomeCli\CommandRunner::runCommand($argv[1] ?? null));
+    $printer->send();
 } catch (\Exception $exception) {
-    Printer::customColor($exception->getMessage(), Colors::RED);
+    $printer = new Printer();
+
+    $printer->addMessage($exception->getMessage(), Colors::RED);
+    $printer->send();
 }

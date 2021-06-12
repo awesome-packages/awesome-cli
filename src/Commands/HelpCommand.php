@@ -14,6 +14,7 @@ class HelpCommand extends AwesomeCommand
     public static function handle(): string
     {
         $commands = [];
+        $printer = new Printer();
 
         array_map(function ($command) use (&$commands) {
             $command = new $command;
@@ -24,18 +25,18 @@ class HelpCommand extends AwesomeCommand
             ];
         }, CommandRunner::$commands);
 
-        Printer::echo('Awesome CLI ' . Colors::GREEN . 'v1.0' . Colors::RESET);
-        Printer::echo('');
-        Printer::customColor('Usage', Colors::YELLOW);
-        Printer::echo('  composer awesome-cli group:action');
-        Printer::echo('');
-        Printer::customColor('Available commands:', Colors::YELLOW);
-        Printer::echo(self::generateDescriptionCommand('help', 'Show this display'));
+        $printer->addMessage('Awesome CLI ' . Colors::GREEN . 'v1.0' . Colors::RESET)
+            ->lineBreak()
+            ->addMessage('Usage', Colors::YELLOW)
+            ->addMessage('  composer awesome-cli group:action')
+            ->lineBreak()
+            ->addMessage('Available commands:', Colors::YELLOW)
+            ->addMessage(self::generateDescriptionCommand('help', 'Show this display'));
 
         foreach($commands as $group => $command) {
-            Printer::customColor($group, Colors::YELLOW);
+            $printer->addMessage($group, Colors::YELLOW);
             foreach ($command as $item) {
-                Printer::echo(
+                $printer->addMessage(
                     self::generateDescriptionCommand(
                         $group . ':' . $item['action'],
                         $item['description']
@@ -44,7 +45,7 @@ class HelpCommand extends AwesomeCommand
             }
         }
 
-        return '';
+        return $printer->getMessage();
     }
 
     public static function generateDescriptionCommand(string $command, string $description): string

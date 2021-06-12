@@ -6,13 +6,27 @@ use AwesomePackages\AwesomeCli\Enum\Colors;
 
 final class Printer
 {
-    public static function echo(string $message): void
+    public string $message = '';
+
+    public function addMessage(string $message, string $color = Colors::RESET): self
     {
-        echo $message . PHP_EOL;
+        $this->message .= $color . $message . Colors::RESET . PHP_EOL;
+        return $this;
     }
 
-    public static function customColor(string $message, string $color = Colors::RESET): void
+    public function lineBreak(): self
     {
-        echo $color . $message . Colors::RESET . PHP_EOL;
+        $this->message .= PHP_EOL;
+        return $this;
+    }
+    
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    public function send(): void
+    {
+        echo $this->message;
     }
 }
