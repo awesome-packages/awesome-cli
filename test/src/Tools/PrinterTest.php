@@ -45,4 +45,16 @@ class PrinterTest extends TestCase
 
         Assert::assertEquals($expectedMessage, $message);
     }
+
+    /** @test */
+    public function givenPrinterClass_UsingSendMethod_ShouldEchoMessage(): void
+    {
+        $printer = new Printer();
+        $printer->addMessage('Hello World', Colors::GREEN)
+            ->lineBreak()
+            ->send();
+        $expectedMessage = $printer->getMessage();
+
+        $this->expectOutputString($expectedMessage);
+    }
 }
