@@ -4,7 +4,7 @@ namespace AwesomePackages\AwesomeCliTests;
 
 use AwesomePackages\AwesomeCli\CommandRunner;
 use AwesomePackages\AwesomeCli\Commands\HelpCommand;
-use AwesomePackages\AwesomeCli\Tools\Printer;
+use AwesomePackages\AwesomeCliTests\Mock\CommandWithVeryLargeActionName;
 use AwesomePackages\AwesomeCliTests\Mock\SayHelloWorldCommand;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
@@ -32,6 +32,10 @@ final class CommandRunnerTest extends TestCase
     /** @test */
     public static function givenCommandRunner_WithHelpCommand_ShouldReturnHelpDetails(): void
     {
+        CommandRunner::registerCommand([
+            CommandWithVeryLargeActionName::class
+        ]);
+
         $exceptedReturn = HelpCommand::handle();
         $return = CommandRunner::runCommand('help');
 
